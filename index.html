@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>บัตรสมาชิกดิจิทัล — สหกรณ์กองทุนสวนยางยูงทอง</title>
+<title>บัตรสมาชิกดิจิทัล — สหกรณ์กองทุนสวนยาง</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,11 +33,18 @@ body{
 }
 h1{font-family:'Kanit',sans-serif; font-weight:700; font-size:30px; margin:6px 0 2px; color:var(--green-800)}
 .subtitle{font-family:'Kanit',sans-serif; font-weight:500; color:var(--gold-600); font-size:16px}
-.logos{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
+.logos{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; align-items:center}
+.logo-slot{display:inline-flex; align-items:center}
+.logo-img{height:38px; width:auto; display:block; object-fit:contain}
 .logo-ph{
+  display:none;
   border:1px dashed #bcd0bc; border-radius:8px; padding:6px 10px; font-size:11px;
   color:#6f846f; background:#fbfdfb; font-family:'Kanit',sans-serif; font-weight:500;
 }
+.sortbar{display:none; align-items:center; gap:6px; margin-top:10px; font-size:12.5px; color:var(--muted)}
+.sortbtn{font-family:'Kanit',sans-serif; font-weight:500; font-size:12px; border:1px solid #bcd8bc; background:#fff;
+  color:var(--green-700); border-radius:999px; padding:3px 12px; cursor:pointer}
+.sortbtn.on{background:var(--green-700); color:#fff; border-color:var(--green-700)}
 
 /* search */
 .search-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-top:22px; box-shadow:0 1px 0 #e7efe7}
@@ -152,12 +159,12 @@ h1{font-family:'Kanit',sans-serif; font-weight:700; font-size:30px; margin:6px 0
 <div class="wrap">
   <div class="eyebrow">โครงการคาร์บอนเครดิตสวนยางพารา · T-VER</div>
   <h1>บัตรสมาชิกดิจิทัล</h1>
-  <div class="subtitle">สหกรณ์กองทุนสวนยางยูงทอง จำกัด</div>
+  <div class="subtitle">สหกรณ์กองทุนสวนยางยูงทอง จำกัด และสหกรณ์กองทุนสวนยางทรายขาว จำกัด </div>
   <div class="logos">
-    <span class="logo-ph">โลโก้ PSU</span>
-    <span class="logo-ph">โลโก้ T-VER</span>
-    <span class="logo-ph">โลโก้ สหกรณ์</span>
-    <span class="logo-ph">โลโก้ TGO</span>
+    <span class="logo-slot"><img class="logo-img" src="logos/yungthong.png" alt="สกย.ยูงทอง" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'"><span class="logo-ph">สกย.ยูงทอง</span></span>
+    <span class="logo-slot"><img class="logo-img" src="logos/saikhao.png" alt="สกย.ทรายขาว" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'"><span class="logo-ph">สกย.ทรายขาว</span></span>
+    <span class="logo-slot"><img class="logo-img" src="logos/psu-energy.png" alt="PSU สถาบันพลังงาน" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'"><span class="logo-ph">PSU สถาบันพลังงาน</span></span>
+    <span class="logo-slot"><img class="logo-img" src="logos/chevron.png" alt="Chevron" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'"><span class="logo-ph">Chevron</span></span>
   </div>
 
   <div class="search-card">
@@ -168,6 +175,10 @@ h1{font-family:'Kanit',sans-serif; font-weight:700; font-size:30px; margin:6px 0
     <div class="hint">พิมพ์แล้วแตะรายชื่อด้านล่างเพื่อดูบัตร · มีทั้งหมด 113 แปลง</div>
     <ul id="results"></ul>
     <button id="showAll" class="linkbtn" type="button">แสดงแปลงทั้งหมด</button>
+    <div class="sortbar" id="sortBar">เรียงตาม:
+      <button class="sortbtn on" id="sortName" type="button">ชื่อ</button>
+      <button class="sortbtn" id="sortCode" type="button">รหัส</button>
+    </div>
     <ul id="allList" style="display:none"></ul>
   </div>
 
@@ -175,7 +186,7 @@ h1{font-family:'Kanit',sans-serif; font-weight:700; font-size:30px; margin:6px 0
     <div class="card-top">
       <div class="kicker">บัตรสมาชิกพิเศษ</div>
       <div class="ttl">สมาชิกโครงการคาร์บอนเครดิตสวนยางพารา</div>
-      <div class="coop">สหกรณ์กองทุนสวนยางยูงทอง จำกัด</div>
+      <div class="coop">สหกรณ์กองทุนสวนยางยูงทอง จำกัด และสหกรณ์กองทุนสวนยางทรายขาว จำกัด</div>
       <div class="badge-tver">T-VER</div>
     </div>
     <div class="card-body">
@@ -312,10 +323,17 @@ search.addEventListener('input', e=>renderResults(e.target.value));
 const NALL = DATA.length;
 const showAll = document.getElementById('showAll');
 const allList = document.getElementById('allList');
+const sortBar = document.getElementById('sortBar');
+const sortNameBtn = document.getElementById('sortName');
+const sortCodeBtn = document.getElementById('sortCode');
 let allOpen = false;
+let sortMode = 'name';
 function buildAll(){
   allList.innerHTML='';
-  const sorted = DATA.slice().sort((a,b)=> a.owner.localeCompare(b.owner,'th') || a.pidx-b.pidx);
+  const sorted = DATA.slice().sort((a,b)=>{
+    if(sortMode==='code'){ return a.fcode.localeCompare(b.fcode,'en'); }
+    return a.owner.localeCompare(b.owner,'th') || a.pidx-b.pidx;
+  });
   sorted.forEach(r=>{
     const li=document.createElement('li');
     li.innerHTML='<span class="r-name">'+r.owner+'</span><span class="r-code">'+r.fcode+'</span>';
@@ -326,10 +344,19 @@ function buildAll(){
 function setAllLabel(){ showAll.textContent = allOpen ? 'ซ่อนรายการ ▴' : ('แสดงแปลงทั้งหมด ('+NALL+' แปลง) ▾'); }
 showAll.addEventListener('click',()=>{
   allOpen=!allOpen;
-  if(allOpen && !allList.childElementCount) buildAll();
+  if(allOpen) buildAll();
   allList.style.display = allOpen ? 'block' : 'none';
+  sortBar.style.display = allOpen ? 'flex' : 'none';
   setAllLabel();
 });
+function setSort(mode){
+  sortMode = mode;
+  sortNameBtn.classList.toggle('on', mode==='name');
+  sortCodeBtn.classList.toggle('on', mode==='code');
+  if(allOpen) buildAll();
+}
+sortNameBtn.addEventListener('click',()=>setSort('name'));
+sortCodeBtn.addEventListener('click',()=>setSort('code'));
 setAllLabel();
 </script>
 </body>
