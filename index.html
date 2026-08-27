@@ -182,7 +182,6 @@ h1{font-family:'Kanit',sans-serif; font-weight:700; font-size:30px; margin:6px 0
 .adminform button{background:var(--green-700); color:#fff; border:none; border-radius:8px; padding:9px 16px; font-family:'Kanit',sans-serif; font-weight:600; cursor:pointer}
 .adminmsg{color:#c0392b; font-size:12.5px}
 .adminok{color:var(--green-700); font-family:'Kanit',sans-serif; font-weight:600; font-size:14px}
-.adminearth{display:block; margin-top:6px; font-size:13px; color:var(--green-800)}
 </style>
 </head>
 <body>
@@ -245,7 +244,7 @@ h1{font-family:'Kanit',sans-serif; font-weight:700; font-size:30px; margin:6px 0
         </a>
         <a class="mapbtn alt" id="f-earth" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15 0 18M12 3c-2.6 2.7-2.6 15 0 18"/></svg>
-          ดูแปลงใน Google Earth
+          ดูกรอบแปลงใน Google Earth
         </a>
         <div id="qr"></div>
         <div class="qr-cap">สแกนเพื่อเปิดแผนที่แปลง</div>
@@ -295,10 +294,7 @@ let curMember = null;
 function fmtArea(a){ return a.toLocaleString('th-TH',{minimumFractionDigits:2, maximumFractionDigits:2}); }
 function mapUrl(r){ return 'https://www.google.com/maps?q=' + r.lat + ',' + r.lng; }
 
-// เปิด Google Earth ที่พิกัดของแปลงนั้น ๆ (0a = ระดับพื้น, 600d = ระยะกล้อง 600 ม.)
-function earthUrl(r){ return 'https://earth.google.com/web/@' + r.lat + ',' + r.lng + ',0a,600d,35y,0h,0t,0r'; }
-
-// โปรเจกต์ Google Earth ที่วาดกรอบแปลงไว้ (ใช้ในโหมดเจ้าหน้าที่)
+// โปรเจกต์ Google Earth ที่วาดกรอบแปลงไว้ (เปลี่ยนลิงก์ได้ที่ตัวแปรนี้)
 const EARTH_PROJECT_URL = "https://earth.google.com/earth/d/13XeMnsgloHHzBQfpdXtxO7LkLEY2sYaJ?usp=sharing";
 
 function renderCard(r){
@@ -313,7 +309,7 @@ function renderCard(r){
   document.getElementById('f-coord').textContent = r.lat.toFixed(5) + ', ' + r.lng.toFixed(5);
   const url = mapUrl(r);
   document.getElementById('f-map').href = url;
-  document.getElementById('f-earth').href = earthUrl(r);
+  document.getElementById('f-earth').href = EARTH_PROJECT_URL;
 
   // plot-boundary map image (per-plot file: maps/{gid}.jpg), fallback = demo
   const gid3 = String(r.gid).padStart(3,'0');
@@ -444,8 +440,7 @@ adminToggle.addEventListener('click',()=>{
 function adminUnlock(){
   if(adminPass.value.trim()===ADMIN_PASS){
     adminTools.style.display='block';
-    document.getElementById('adminLogin').innerHTML='<span class="adminok">✓ โหมดเจ้าหน้าที่ — เห็นทุกแปลง</span>'+
-      '<a class="adminearth" href="'+EARTH_PROJECT_URL+'" target="_blank" rel="noopener">🌏 เปิดโปรเจกต์กรอบแปลงทั้งหมดใน Google Earth</a>';
+    document.getElementById('adminLogin').innerHTML='<span class="adminok">✓ โหมดเจ้าหน้าที่ — เห็นทุกแปลง</span>';
     document.getElementById('showAll').scrollIntoView({behavior:'smooth',block:'center'});
   } else { adminMsg.textContent='รหัสไม่ถูกต้อง'; adminPass.value=''; adminPass.focus(); }
 }
