@@ -297,13 +297,14 @@ function mapUrl(r){ return 'https://www.google.com/maps?q=' + r.lat + ',' + r.ln
 // โปรเจกต์ Google Earth ที่วาดกรอบแปลงไว้
 // ต้นทาง: https://earth.google.com/earth/d/13XeMnsgloHHzBQfpdXtxO7LkLEY2sYaJ?usp=sharing
 // ลิงก์นั้นเปิดโปรเจกต์เฉย ๆ ไม่พาไปที่แปลง ต้องเอารหัสโปรเจกต์ (data=) มาต่อกับพิกัด
-// วิธีหารหัสใหม่ถ้าเปลี่ยนโปรเจกต์: เปิดลิงก์แชร์ในเบราว์เซอร์ แล้วก๊อปค่าหลัง data= จาก URL ที่เด้งไป
-const EARTH_PROJECT_DATA = "MicKJQojCiExM1hlTW5zZ2xvSEh6QlFmcGRYdHhPN0xrTEVZMnNZYUo";
+// วิธีหารหัสใหม่ถ้าเปลี่ยนโปรเจกต์: เปิดโปรเจกต์ใน Google Earth รอให้กรอบแปลงขึ้นครบ
+// แล้วก๊อปค่าหลัง data= จากช่อง URL ของเบราว์เซอร์มาวางแทน
+const EARTH_PROJECT_DATA = "CgRCAggBMikKJwolCiExM1hlTW5zZ2xvSEh6QlFmcGRYdHhPN0xrTEVZMnNZYUogAToDCgEwQgIIAEoICL7o9cUBEAE";
 
 // เปิด Earth พร้อมกรอบแปลง แล้วบินไปที่พิกัดแปลงนั้น (0a = ระดับพื้น, 600d = ระยะกล้อง 600 ม.)
 function earthUrl(r){
   return 'https://earth.google.com/web/@' + r.lat + ',' + r.lng +
-         ',0a,600d,35y,0h,0t,0r/data=' + EARTH_PROJECT_DATA;
+         ',0a,600d,30y,0h,0t,0r/data=' + EARTH_PROJECT_DATA;
 }
 
 function renderCard(r){
