@@ -294,8 +294,17 @@ let curMember = null;
 function fmtArea(a){ return a.toLocaleString('th-TH',{minimumFractionDigits:2, maximumFractionDigits:2}); }
 function mapUrl(r){ return 'https://www.google.com/maps?q=' + r.lat + ',' + r.lng; }
 
-// โปรเจกต์ Google Earth ที่วาดกรอบแปลงไว้ (เปลี่ยนลิงก์ได้ที่ตัวแปรนี้)
-const EARTH_PROJECT_URL = "https://earth.google.com/earth/d/13XeMnsgloHHzBQfpdXtxO7LkLEY2sYaJ?usp=sharing";
+// โปรเจกต์ Google Earth ที่วาดกรอบแปลงไว้
+// ต้นทาง: https://earth.google.com/earth/d/13XeMnsgloHHzBQfpdXtxO7LkLEY2sYaJ?usp=sharing
+// ลิงก์นั้นเปิดโปรเจกต์เฉย ๆ ไม่พาไปที่แปลง ต้องเอารหัสโปรเจกต์ (data=) มาต่อกับพิกัด
+// วิธีหารหัสใหม่ถ้าเปลี่ยนโปรเจกต์: เปิดลิงก์แชร์ในเบราว์เซอร์ แล้วก๊อปค่าหลัง data= จาก URL ที่เด้งไป
+const EARTH_PROJECT_DATA = "MicKJQojCiExM1hlTW5zZ2xvSEh6QlFmcGRYdHhPN0xrTEVZMnNZYUo";
+
+// เปิด Earth พร้อมกรอบแปลง แล้วบินไปที่พิกัดแปลงนั้น (0a = ระดับพื้น, 600d = ระยะกล้อง 600 ม.)
+function earthUrl(r){
+  return 'https://earth.google.com/web/@' + r.lat + ',' + r.lng +
+         ',0a,600d,35y,0h,0t,0r/data=' + EARTH_PROJECT_DATA;
+}
 
 function renderCard(r){
   curMember = r.m;
@@ -309,7 +318,7 @@ function renderCard(r){
   document.getElementById('f-coord').textContent = r.lat.toFixed(5) + ', ' + r.lng.toFixed(5);
   const url = mapUrl(r);
   document.getElementById('f-map').href = url;
-  document.getElementById('f-earth').href = EARTH_PROJECT_URL;
+  document.getElementById('f-earth').href = earthUrl(r);
 
   // plot-boundary map image (per-plot file: maps/{gid}.jpg), fallback = demo
   const gid3 = String(r.gid).padStart(3,'0');
